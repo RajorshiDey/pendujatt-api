@@ -12,7 +12,9 @@ app = Flask(__name__)
 CORS(app)
 BASE_URL = "https://pendujatt.com.se"
 
-chrome_options = Options()
+
+def get_mp3_link(song_name):
+    chrome_options = Options()
     # chrome_options.binary_location = "/usr/bin/chromium-browser"  # Replit Chromium
     chrome_options.add_argument("--headless=new")
     chrome_options.add_argument("--no-sandbox")
@@ -26,7 +28,6 @@ chrome_options = Options()
         options=chrome_options
     )
 
-def get_mp3_link(song_name):
     try:
         # Open search page
         query = song_name.replace(" ", "+")
@@ -77,5 +78,6 @@ def home():
 
 if __name__ == "__main__":
     app.run(host="0.0.0.0", port=8080, debug=True)
+
 
 
