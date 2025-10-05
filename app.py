@@ -16,6 +16,13 @@ def get_mp3_link(song_name):
     options.add_argument("--disable-gpu")
     options.add_argument("--no-sandbox")  # Needed for Linux/Docker
     options.add_argument("--disable-dev-shm-usage")  # Fix low memory issues in containers
+    options.add_argument("--disable-gpu")
+    options.add_argument("--disable-software-rasterizer")
+    options.add_argument("--remote-debugging-port=9222")
+
+    # Important: Tell Selenium where Chromium is
+    options.binary_location = "/usr/bin/chromium-browser"
+
     driver = webdriver.Chrome(service=Service(ChromeDriverManager().install()), options=options)
     
     try:
