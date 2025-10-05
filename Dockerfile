@@ -24,6 +24,8 @@ RUN pip install --no-cache-dir -r requirements.txt
 EXPOSE 8080
 
 # Start Flask with gunicorn (Render expects this format)
-CMD ["gunicorn", "--bind", "0.0.0.0:8080", "--workers=1", "app:app"]
+CMD ["gunicorn", "--bind", "0.0.0.0:8080", "--workers=1", "--timeout=120", "app:app"]
+
+
 
 
