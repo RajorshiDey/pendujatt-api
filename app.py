@@ -11,19 +11,13 @@ app = Flask(__name__)
 BASE_URL = "https://pendujatt.com.se"
 
 def get_mp3_link(song_name):
-    options = Options()
-    options.add_argument("--headless")  # Run Chrome in background
-    options.add_argument("--disable-gpu")
-    options.add_argument("--no-sandbox")  # Needed for Linux/Docker
-    options.add_argument("--disable-dev-shm-usage")  # Fix low memory issues in containers
-    options.add_argument("--disable-gpu")
-    options.add_argument("--disable-software-rasterizer")
-    options.add_argument("--remote-debugging-port=9222")
+    chrome_options = Options()
+    chrome_options.binary_location = "/usr/bin/chromium-browser"  # Replit Chromium
+    chrome_options.add_argument("--headless")
+    chrome_options.add_argument("--no-sandbox")
+    chrome_options.add_argument("--disable-dev-shm-usage")
 
-    # Important: Tell Selenium where Chromium is
-    options.binary_location = "/usr/bin/chromium-browser"
-
-    driver = webdriver.Chrome(service=Service(ChromeDriverManager().install()), options=options)
+    driver = webdriver.Chrome(service=Service(ChromeDriverManager().install()), options=chrome_options)
     
     try:
         # Open search page
@@ -75,3 +69,4 @@ def home():
 
 if __name__ == "__main__":
     app.run(host="0.0.0.0", port=5000, debug=True)
+
