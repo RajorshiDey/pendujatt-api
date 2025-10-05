@@ -6,8 +6,10 @@ from selenium.webdriver.chrome.options import Options
 from webdriver_manager.chrome import ChromeDriverManager
 from urllib.parse import urljoin
 import time
+from flask_cors import CORS
 
 app = Flask(__name__)
+CORS(app)
 BASE_URL = "https://pendujatt.com.se"
 
 def get_mp3_link(song_name):
@@ -75,3 +77,4 @@ def home():
 
 if __name__ == "__main__":
     app.run(host="0.0.0.0", port=8080, debug=True)
+
