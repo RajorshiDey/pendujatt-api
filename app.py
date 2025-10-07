@@ -7,12 +7,14 @@ from webdriver_manager.chrome import ChromeDriverManager
 from urllib.parse import urljoin
 import time
 from flask_cors import CORS
+#for cache
+from functools import lru_cache
 
 app = Flask(__name__)
 CORS(app)
 BASE_URL = "https://pendujatt.com.se"
 
-
+@lru_cache(maxsize=1000)
 def get_mp3_link(song_name):
     chrome_options = Options()
     # chrome_options.binary_location = "/usr/bin/chromium-browser"  # Replit Chromium
@@ -78,6 +80,5 @@ def home():
 
 if __name__ == "__main__":
     app.run(host="0.0.0.0", port=8080, debug=True)
-
 
 
